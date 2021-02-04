@@ -1,0 +1,19 @@
+.body {
+	font-family: sans-serif;
+}
+
+a:link {
+	color: #00b7a2;
+}
+
+a:visited {
+	color: #00858e;
+}
+
+a:hover {
+	color: #00a390;
+}
+
+a:active {
+	color: #009987;
+}
