@@ -1,0 +1,13 @@
+.setting {
+    display: inline-block;
+    margin-inline-end: 5em;
+    margin-block: 1em;
+}
+
+#function {
+    font-family: monospace;
+}
+
+#function-good {
+    display: block;
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf8">
+		<title>pid controller</title>
+		<link rel="stylesheet" href="/stylesheet.css">
+        <link rel="stylesheet" href="pid.css"
+	</head>
+	<body>
+		<h1>pid controller</h1>
+		<p>en wikipedia wiki pid_controller</p>
+
+        <canvas id="graph" width="640" height="480" style="display: block">uhh use your imagination</canvas>
+
+        <div class="setting">
+            <label for="wideness">graph too wide?</label>
+            <input id="wideness" type="number">
+            <button id="too-wide" type="button">yes</button>
+        </div>
+        <br>
+
+        <div class="setting">
+            <label for="ticks-per-unit">Ticks per unit</label>
+            <input id="ticks-per-unit" type="number" value="10">
+        </div>
+
+        <div class="setting">
+            <label for="units-per-second">Units per second</label>
+            <input id="units-per-second" type="number" value="3.14">
+        </div>
+
+        <div class="setting">
+            <label for="height-units">y-axis bounds (maximum y-value, centered on 0)</label>
+            <input id="height-units" type="number" value="1">
+        </div>
+
+        <div class="setting">
+            <label for="width-units">x-axis width</label>
+            <input id="width-units" type="number" value="50">
+        </div>
+
+        <div class="setting">
+            <label for="proportional">Proportional</label>
+            <input id="proportional" type="number" value="0">
+        </div>
+
+        <div class="setting">
+            <label for="integral">Integral</label>
+            <input id="integral" type="number" value="0">
+        </div>
+
+        <div class="setting">
+            <label for="derivative">Derivative</label>
+            <input id="derivative" type="number" value="0">
+        </div>
+
+        <button id="broke" type="button">i broke it</button>
+        <br>
+
+        <p>Function (just js; use return)</p>
+        <textarea id="function" rows="10" cols="80">return Math.sin(x);</textarea>
+        <button id="function-good" type="button">i want to submit the function now</button>
+        <p id="function-error"></p>
+
+        <script src="pid.js"></script>
+	</body>
+</html>
