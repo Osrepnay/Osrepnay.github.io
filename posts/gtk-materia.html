@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf8">
+		<title>getting materia-theme to change-color</title>
+		<link rel="stylesheet" href="/stylesheet.css">
+	</head>
+	<body>
+		<h1>getting materia-theme to change-color</h1>
+        <p>
+            <a href="https://github.com/nana-4/materia-theme">nana-4/materia-theme</a> is broken/abandoned, as you might have noticed if you've tried to make a custom theme on <a href="https://github.com/themix-project/themix-gui">Themix</a> like I did (before it was apparently removed? It's not in the app anymore as far as I can tell). Technically only the rendering script(s) are actually nonfunctional; the base theme is still mostly working. Basic black and blue boxes are for nerds, though, I want to customize it!
+        </p>
+        <p>
+            With the help of a <a href="https://github.com/nana-4/materia-theme/issues/591#issuecomment-987039094">comment</a> on an issue, I was able to get a build at least successfully running with the command
+            <pre><code>find -name '*.sh' | xargs sed -i 's/rendersvg/resvg/g; s/--export-id/--export-area-drawing --export-id/g'</code></pre>
+            which fixes the broken resvg detection and usage. I'm not sure what the second line does; I think it might be trying to fix <a href="https://github.com/nana-4/materia-theme/issues/523">issue 523</a> which is a problem in the generated themes in GTK 2, but it doesn't seem to do anything for me. Instead, what I did to fix the <a href="https://github.com/nana-4/materia-theme/issues/523#issuecomment-694397468">incorrectly sized assets</a> was to whip up a hacky script to crop the generated assets to size based on the prerendered assets in the repo:
+            <pre><code>#!/bin/sh
+for img in $1/*.png; do
+    echo "cropping $img from $2/$(basename $img)"
+    dims=$(identify -format '%G\n' $2/$(basename $img))
+    mogrify -crop $dims+0+0 $img +repage
+done
+</code></pre>
+            Then, assuming the generated theme is in <code>~/.themes/BarbarFOo</code> and the freshly cloned materia-theme folder is at <code>~/materia-theme</code>, you would run <code>./crop.sh ~/.themes/BarbarFOo/gtk-2.0/assets ~/materia-theme/src/gtk-2.0/assets</code>. I'm not sure if this is necessary for GTK 3, but might as well do it. Hopefully, now you should have a correctly rendered recolored Materia-based theme! I guess you could have also used Nix to get an older version of Inkscape, but whatever.
+        </p>
+	</body>
+</html>
